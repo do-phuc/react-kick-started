@@ -1,10 +1,12 @@
-import './App.css'
-import { Expenses } from './pages/Expenses'
+import "./App.css";
+import { Expenses } from "./pages";
 
 function App() {
   return (
-    <Expenses></Expenses>
-  )
+    <div className="app">
+      <Expenses></Expenses>
+    </div>
+  );
 }
 
-export default App
+export default App;
