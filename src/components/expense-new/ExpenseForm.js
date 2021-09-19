@@ -82,7 +82,9 @@ export const ExpenseForm = (props) => {
         </div>
       </div>
 
-      <button className="actions">Add expense</button>
+      <div className="actions">
+        <button>Add expense</button>
+      </div>
     </form>
   );
 };

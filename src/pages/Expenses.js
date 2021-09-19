@@ -1,9 +1,10 @@
 import "./expense.css";
 import { Card, ExpenseItem, NewExpense } from "../components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ExpenseFilter from "../components/expense-filter/ExpenseFilter";
 
 export function Expenses() {
-  const expenses = [
+  const initialState = [
     {
       id: "e1",
       title: "Toilet Paper",
@@ -25,27 +26,41 @@ export function Expenses() {
     },
   ];
 
-  const [expenseData, setExpenseData] = useState(expenses);
+  const [expenses, setExpenses] = useState(initialState);
+  const [filteredExpenses, setFilteredExpenses] = useState(initialState);
+  const [yearFilter, setYearFilter] = useState("");
 
   const createNewExpense = (data) => {
-    setExpenseData((prevState) => {
+    setExpenses((prevState) => {
       return [data, ...prevState];
     });
 
-    setTimeout(() => {
-      checkExpense();
-    }, 2000);
+    setFilteredExpenses((prevState) => {
+      return [data, ...prevState];
+    });
   };
 
-  const checkExpense = () => {
-    console.log(expenseData);
+  const filterExpenseByYear = (year) => {
+    setYearFilter(year);
   };
+
+  useEffect(() => {
+    const filteredData = !!yearFilter
+      ? (expenses || []).filter(
+          (expense) => expense.date.getFullYear() === +yearFilter
+        )
+      : expenses;
+
+    setFilteredExpenses(filteredData);
+  }, [expenses, yearFilter]);
 
   return (
     <Card className="expenses">
       <NewExpense onNewExpenseCreated={createNewExpense}></NewExpense>
 
-      {expenseData.map((expense, index) => (
+      <ExpenseFilter onYearFilterSelect={filterExpenseByYear}></ExpenseFilter>
+
+      {filteredExpenses.map((expense, index) => (
         <ExpenseItem expense={expense} key={index}></ExpenseItem>
       ))}
     </Card>
