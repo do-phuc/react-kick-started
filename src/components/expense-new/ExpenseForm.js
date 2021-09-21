@@ -9,6 +9,7 @@ export const ExpenseForm = (props) => {
   };
 
   const [expense, setExpense] = useState(initialState);
+  const [toggleForm, setToggleForm] = useState(false);
 
   const titleChangeHandler = (ev) => {
     setExpense((prevState) => {
@@ -51,6 +52,18 @@ export const ExpenseForm = (props) => {
     setExpense(initialState);
   };
 
+  const toggleFormHandler = () => {
+    setToggleForm((prevState) => !prevState);
+  };
+
+  if (!toggleForm) {
+    return (
+      <button type="button" onClick={toggleFormHandler}>
+        Add new expense
+      </button>
+    );
+  }
+
   return (
     <form onSubmit={submitExpenseFormHandler}>
       <div className="controls">
@@ -83,6 +96,9 @@ export const ExpenseForm = (props) => {
       </div>
 
       <div className="actions">
+        <button type="button" onClick={toggleFormHandler}>
+          Cancel
+        </button>
         <button>Add expense</button>
       </div>
     </form>

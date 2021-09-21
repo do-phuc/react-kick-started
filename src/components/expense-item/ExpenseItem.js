@@ -7,12 +7,14 @@ export function ExpenseItem(props) {
   const { title, amount, date } = props.expense;
 
   return (
-    <Card className="expense-item">
-      <ExpenseDate date={date}></ExpenseDate>
-      <ExpenseItemDescription
-        title={title}
-        amount={amount}
-      ></ExpenseItemDescription>
-    </Card>
+    <li>
+      <Card className="expense-item">
+        <ExpenseDate date={date}></ExpenseDate>
+        <ExpenseItemDescription
+          title={title}
+          amount={amount}
+        ></ExpenseItemDescription>
+      </Card>
+    </li>
   );
 }

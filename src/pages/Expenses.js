@@ -1,5 +1,5 @@
-import "./expense.css";
-import { Card, ExpenseItem, NewExpense } from "../components";
+import "./Expense.css";
+import { Card, ExpenseList, NewExpense } from "../components";
 import { useEffect, useState } from "react";
 import ExpenseFilter from "../components/expense-filter/ExpenseFilter";
 
@@ -60,9 +60,7 @@ export function Expenses() {
 
       <ExpenseFilter onYearFilterSelect={filterExpenseByYear}></ExpenseFilter>
 
-      {filteredExpenses.map((expense, index) => (
-        <ExpenseItem expense={expense} key={index}></ExpenseItem>
-      ))}
+      <ExpenseList expenses={filteredExpenses}></ExpenseList>
     </Card>
   );
 }
